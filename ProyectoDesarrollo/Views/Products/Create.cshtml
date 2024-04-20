@@ -1,0 +1,63 @@
+﻿@model ProyectoDesarrollo.Models.Products
+
+@{
+    ViewData["Title"] = "Create";
+}
+<hr />
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Create Product</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="PRODUCT_NAME" class="control-label">Product Name</label>
+                        <input asp-for="PRODUCT_NAME" class="form-control" />
+                        <span asp-validation-for="PRODUCT_NAME" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DESCRIPTION" class="control-label">Description</label>
+                        <input asp-for="DESCRIPTION" class="form-control" />
+                        <span asp-validation-for="DESCRIPTION" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="STANDARD_COST" class="control-label">Cost</label>
+                        <input asp-for="STANDARD_COST" class="form-control" type="text" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid number" />
+                        <span asp-validation-for="STANDARD_COST" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LIST_PRICE" class="control-label">Price</label>
+                        <input asp-for="LIST_PRICE" class="form-control" type="text" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid number" />
+                        <span asp-validation-for="LIST_PRICE" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CATEGORY_ID" class="control-label">Select Category</label>
+                        <select asp-for="CATEGORY_ID" class="form-control">
+                        <option value="">-- Select Category --</option>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category.Value">@category.Text</option>
+                        }
+                        </select>
+                        <span asp-validation-for="CATEGORY_ID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

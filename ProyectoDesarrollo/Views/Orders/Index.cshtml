@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ProyectoDesarrollo.Models.Orders>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Orders</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDER_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CUSTOMER_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STATUS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SALESMAN_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDER_DATE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ORDER_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STATUS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SALESMAN_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ORDER_DATE)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ORDER_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ORDER_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ORDER_ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @{
+                var prevDisabled = (ViewBag.PageNumber <= 1);
+                var nextDisabled = (ViewBag.PageNumber >= ViewBag.TotalPages);
+                int maxPages = 5; // Cambia este valor según tus preferencias
+
+                int startPage = Math.Max(1, ViewBag.PageNumber - (maxPages / 2));
+                int endPage = Math.Min(startPage + maxPages - 1, ViewBag.TotalPages);
+
+                if (endPage - startPage + 1 < maxPages)
+                {
+                    startPage = Math.Max(1, endPage - maxPages + 1);
+                }
+            }
+
+            <li class="page-item @(prevDisabled ? "disabled" : "")">
+                <a class="page-link" href="?page=@(ViewBag.PageNumber - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(nextDisabled ? "disabled" : "")">
+                <a class="page-link" href="?page=@(ViewBag.PageNumber + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
