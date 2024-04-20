@@ -7,7 +7,7 @@
 <h1>Products</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -56,9 +56,9 @@
                     @Html.DisplayFor(modelItem => item.Categories.CATEGORY_NAME)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCT_ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.PRODUCT_ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCT_ID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCT_ID }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PRODUCT_ID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCT_ID }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

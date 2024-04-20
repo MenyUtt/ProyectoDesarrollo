@@ -19,7 +19,7 @@ namespace ProyectoDesarrollo.Controllers
 
         public ActionResult Index(int? page)
         {
-            int pageSize = 10;
+            int pageSize = 5;
             int pageNumber = page ?? 1;
 
             var customers = _context.customers.OrderBy(c => c.CUSTOMER_ID);

@@ -18,7 +18,7 @@ namespace ProyectoDesarrollo.Controllers
 
         public ActionResult Index(int? page)
         {
-            int pageSize = 10;
+            int pageSize = 5;
             int pageNumber = page ?? 1;
 
             var regions = _context.regions.OrderBy(c => c.REGION_ID);
